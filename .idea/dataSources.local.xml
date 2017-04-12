@@ -9,7 +9,6 @@
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <user-name>root</user-name>
       <user-password>dfd8dfc5dfc5dfde</user-password>
-      <introspection-scope>sim_site:</introspection-scope>
       <resolve-scope>sim_site:</resolve-scope>
     </data-source>
     <data-source name="local server" uuid="46155593-147e-449b-a560-ead4d990d496">
@@ -20,7 +19,6 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-scope>sim_site:</introspection-scope>
       <resolve-scope>sim_site:</resolve-scope>
     </data-source>
   </component>
