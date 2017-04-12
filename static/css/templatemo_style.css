@@ -1,0 +1,211 @@
+/*
+Credit: http://www.templatemo.com
+*/
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #666;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	line-height: 1.5em; 
+	background-color: #ebe8e1;
+	background-image: url(../images/templatemo_body.jpg);
+	background-repeat: no-repeat;
+	background-position: top center;
+	background-attachment: fixed;
+}
+
+h1 { font-size: 34px; margin: 0 0 20px; padding: 5px 0; color: #000; font-weight: normal; }
+
+.b-page{
+	width: 1006px;
+	margin: 0 auto;
+	padding-left: 6px;
+/*	background: url(images/templatemo_body.jpg) center top no-repeat; */
+}
+
+#templatemo_header {
+	height: 40px;
+	padding: 40px 15px 40px 6px;
+}
+
+#site_title { float: left; font-family: 'Pacifico', cursive;}
+#site_title h1 a { display: block; width: 160px; height: 60px; background:url(../images/templatemo_logo.png)  no-repeat top left; color: #000; font-size: 40px; font-weight: 400; outline: none; text-indent: -10000px; }
+
+#templatemo_menu { float: right; margin-top: 20px; }
+#templatemo_menu ul { padding: 0; margin: 0; list-style: none; }
+#templatemo_menu ul li { margin: 0; padding: 0; display: inline-block }
+#templatemo_menu ul li a {
+	float: left;
+	display: block;
+	font-size: 18px;
+	color: #333;	
+	margin-left: 25px;
+	text-decoration: none;
+	font-weight: 400;
+	outline: none;
+}
+
+#templatemo_menu ul li a:hover, #templatemo_menu ul .current {
+	color: #000;
+	text-decoration: underline;
+}
+
+.content_top { clear: both; height: 10px }
+.content_box {
+	position: relative;
+	width: 955px;
+    margin-bottom: 30px;
+    padding: 55px 15px 30px 25px;
+    background: #fff;
+}
+
+.content_title { position: absolute; width: 106px; height: 104px;
+ top: -5px; left: -6px; }
+
+.content_home { background: url(../images/templatemo_content_title.png) no-repeat }
+
+a.gototop { display: block; position: absolute; width: 140px; height: 25px; padding: 65px 10px 0 0; text-align: right; font-size: 14px; bottom: 0; right: 0; color: #000; background: url(../images/templatemo_gototop.png) no-repeat; text-decoration: none; }
+a.gototop:hover { text-decoration: underline }
+ 
+
+#templatemo_footer {
+	clear: both;
+	width: 800px;
+	padding: 0 0 20px 6px;
+	text-align: center;
+	background: url(images/templatemo_footer.jpg) center top no-repeat
+}
+
+#templatemo_footer a { color: #000 }
+
+.b-apn {
+	position: fixed;
+	right: 5px;
+	top: 5px;
+	padding: 10px;
+	width: 200px;
+	border: 1px solid #e6e6e6;
+	border-radius: 3px;
+	background-color: #fff;
+	color: #333;
+	box-shadow: 1px 1px 4px -3px #666666;
+}
+
+.b-apn__table {
+	display: table;
+	width: 100%;
+	table-layout:fixed;
+}
+
+.b-apn__table-row {
+	display: table-row;
+}
+
+.b-apn__table-cell {
+	display: table-cell;
+	vertical-align: top;
+	padding: 3px;
+}
+.b-apn__table-cell_type_title {
+	width: 80px;
+}
+
+.b-content {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 13px;
+	width: 100%;
+	background: white;
+	text-align: left;
+	border-collapse: collapse;
+	color: #333;
+	padding-bottom: 30px;
+}
+.b-table {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+.b-table__row {
+	display: table-row;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.b-table__cell {
+	display: table-cell;
+	vertical-align: top;
+	text-align: center;
+	padding: 7px 5px;
+}
+
+.b-table__cell_type_header {
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.b-table__cell_width_sim_number {
+	width: 42px
+}
+
+.b-table__cell_width_80 {
+	width: 80px
+}
+
+.b-table__cell_width_100 {
+	width: 100px
+}
+
+.b-table__cell_width_110 {
+	width: 110px
+}
+
+.b-table__cell_width_120 {
+	width: 120px
+}
+
+.b-table__cell_appointment {
+    width: 140px
+}
+
+.b-table__row_error {
+	width: 100%
+}
+
+.b-textbox {
+	display: inline-block;
+    box-sizing: border-box;
+    padding: 2px 2px;
+    width: 100%;
+    outline: 0 none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px #f2f2f2 inset;
+    color: #333;
+    font: 14px/18px Arial,sans-serif;
+}
+
+.b-textbox_resize {
+    resize: vertical;
+}
+
+.b-colored-text{
+	color: #CF000F;
+}
+
+.b-link {
+	display: inline-block;
+	color: #bfb839;
+	text-decoration: none;
+    border-bottom: 1px dotted;
+    user-select: none;
+    cursor: pointer;
+}
+
+.b-link:hover {
+	text-decoration: none;
+	border-color: transparent;
+}

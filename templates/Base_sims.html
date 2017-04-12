@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/templatemo_style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'favicon.jpg' %}" type="image/jpg" />
+    <meta http-equiv="Refresh" content="80" />
+</head>
+<body>
+
+<span id="top"></span>
+<div class="b-apn">
+    <div class="b-apn__table">
+        <div class="b-apn__table-row">
+            <div class="b-apn__table-cell b-apn__table-cell_type_title">
+                <b>Kyivstar</b>:
+            </div>
+            <div class="b-apn__table-cell">
+                www.ab.kyivstar.net
+            </div>
+        </div>
+        <div class="b-apn__table-row">
+            <div class="b-apn__table-cell b-apn__table-cell_type_title">
+                <b>Vodafone</b>:
+            </div>
+            <div class="b-apn__table-cell">
+                Internet
+            </div>
+        </div>
+        <div class="b-apn__table-row">
+            <div class="b-apn__table-cell b-apn__table-cell_type_title">
+                <b>lifecell</b>:
+            </div>
+            <div class="b-apn__table-cell">
+                not blank
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="b-page">
+	<div id="templatemo_header">
+        <div id="site_title">
+            <h1>{% block page_name %}{% endblock %}</h1>
+        </div>
+        <div id="templatemo_menu">
+            <ul>
+                <li><a href="/pmaster/">Power Master</a></li>
+                <li><a href="/pmanage/">Power Manage</a></li>
+                <li><a href="/dev/">Integration</a></li>
+                <li><a href="/alpha/">Alpha/Auto</a></li>
+                <li><a href="/admin/">Administration</a></li>
+            </ul>    	
+        </div> <!-- end of templatemo_menu -->
+	</div> <!-- end of header -->
+    
+
+    <div class="content_box">
+        <div class="content_title content_home"></div>
+        <div class="b-content">
+                <div class="b-table">
+        <div class="b-table__row">
+            <div class="b-table__cell b-table__cell_type_header b-table__cell_width_sim_number">Sim №</div>
+            <div class="b-table__cell b-table__cell_type_header b-table__cell_width_120">Number</div>
+            <div class="b-table__cell b-table__cell_type_header b-table__cell_width_120">Operator</div>
+            <div class="b-table__cell b-table__cell_type_header b-table__cell_width_80">Balance</div>
+            <div class="b-table__cell b-table__cell_type_header b-table__cell_width_80">Last update</div>
+            <!--<div class="b-table__cell b-table__cell_type_header b-table__cell_appointment">Appointment</div>-->
+            <div class="b-table__cell b-table__cell_type_header">Appointment and Comment</div>
+        </div>
+{% if errors %}
+    {% for error in errors %}
+    </div>
+    <div class="b-table">
+        <div class="b-table__row">
+            <div class="b-table__cell">
+                {{ error }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    {% for card in sim_cards %}
+        <div class="b-table__row">
+            <div class="b-table__cell">
+                {{ card.sim_number }}
+            </div>
+            <div class="b-table__cell">
+                {{ card.name }}<br>{{ card.password }}
+            </div>
+            {% if card.cell_operator|stringformat:"s" == "lifecell" %}
+                <div class="b-table__cell">
+                    <a class="b-link" href="https://my.lifecell.com.ua/" target="_blank">{{ card.cell_operator }}</a>
+                    <br>{{ card.tariff }}
+                </div>
+            {% elif card.cell_operator|stringformat:"s" == "Kyivstar" %}
+                <div class="b-table__cell">
+                    <a class="b-link" href="https://my.kyivstar.ua/" target="_blank">{{ card.cell_operator }}</a>
+                    <br>{{ card.tariff }}
+                </div>
+            {% elif card.cell_operator|stringformat:"s" == "Vodafone" %}
+                <div class="b-table__cell">
+                    <a class="b-link" href="https://ihelper-prp.mts.com.ua/SelfCare/" target="_blank">{{ card.cell_operator }}</a>
+                    <br>{{ card.tariff }}
+                </div>
+            {% elif card.cell_operator|stringformat:"s" == "3mob" %}
+                <div class="b-table__cell">
+                    <a class="b-link" href="https://my.3mob.ua/ua/" target="_blank">{{ card.cell_operator }}</a>
+                    <br>{{ card.tariff }}
+                </div>
+            {% endif %}
+            {% if card.balance_renewal_in_progress %}
+                <div class="b-table__cell">
+                    <div class="b-colored-text">
+                        <img src="{% static 'images/761.gif' %}" alt="">
+                    </div>
+                </div>
+            {% else %}
+                {% if card.balance <= 5 %}
+                    <div class="b-table__cell">
+                        <div class="b-colored-text">{{ card.balance }}
+                            <form action="/update_balance?sim_id={{ card.id }}&owner_id={{ card.owner.id }}" method="post">{% csrf_token %}
+                                <button type="submit"><img src="{% static 'images/renew.png' %}" width="15px"></button>
+                            </form>
+                        </div>
+                    </div>
+                {% elif card.balance <= 10.0 %}
+                    <div class="b-table__cell">
+                        <font color="DarkGoldenrod">{{ card.balance }}</font>
+                            <form action="/update_balance?sim_id={{ card.id }}&owner_id={{ card.owner.id }}" method="post">{% csrf_token %}
+                                <button type="submit"><img src="{% static 'images/renew.png' %}" width="15px"></button>
+                            </form>
+
+                    </div>
+                {% elif card.balance > 10.0 %}
+                    <div class="b-table__cell">{{ card.balance }}
+                        <form action="/update_balance?sim_id={{ card.id }}&owner_id={{ card.owner.id }}" method="post">{% csrf_token %}
+                            <button type="submit"><img src="{% static 'images/renew.png' %}" width="15px"></button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            <div class="b-table__cell">
+                {{ card.last_update|date:'d-M H:i:s' }}
+            </div>
+            <div class="b-table__cell">
+                <form action="/save_info?sim_id={{ card.id }}&owner_id={{ card.owner.id }}" method="post">{% csrf_token %}
+                    <div class="b-table__cell">
+                        <input type="text" class="b-textbox" value="{{ card.appointment }}" name="appointment" maxlength="40">
+                    </div>
+                    <div class="b-table__cell">
+                        <textarea type="text" class="b-textbox b-textbox_resize" name="comment" maxlength="40">{{ card.comment }}</textarea>
+                    </div>
+                    <div class="b-table__cell">
+                        <input type="submit" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+    <div class="b-table">
+        <div class="b-table__row">
+            <div class="b-table__cell">
+                Total cards in list: {{ sim_cards.count }}
+            </div>
+        </div>
+    </div>
+        </div>
+
+        <a href="#" class="gototop">Go To Top</a>
+    </div>
+    
+    <div id="templatemo_footer">
+    
+        <span>Contacts</span>
+        <a rel="nofollow" href="mailto:AGribenko@tycoint.com">Anton</a>
+        <span>or</span>
+        <a rel="nofollow" href="mailto:OMozharovskyi@tycoint.com">Oleg</a>
+        
+        <div class="cleaner"></div>
+    </div>
+    
+</div> <!-- end of warpper -->
+
+</body>
+</html>
