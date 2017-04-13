@@ -1,0 +1,4 @@
+*.pyc
+/collected_static
+db.txt
+mail_sender.txt
