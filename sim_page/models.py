@@ -20,6 +20,7 @@ class SimCard(models.Model):
     # login = models.CharField(max_length=30, blank=False)
     password = models.CharField(max_length=30, blank=False)
     balance_renewal_in_progress = models.BooleanField(default=False)
+    notification_address = models.EmailField(blank=True)
 
     def __str__(self):
         return self.name
