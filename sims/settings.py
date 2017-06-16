@@ -11,7 +11,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
-import os, djcelery
+import os
+import djcelery
+import socket
 
 djcelery.setup_loader()
 
@@ -26,7 +28,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*32^#=s7w0w^5t98=j^lf^m3_=64^(=&u5&t+r3e+j$qlayvnp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if socket.gethostname() == 'logger':
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -42,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sim_page',
     'djcelery',
-#    'djkombu',
 ]
 
 BROKER_URL = 'redis://localhost:6379/0'
@@ -89,12 +93,20 @@ WSGI_APPLICATION = 'sims.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+try:
+    with open('db.txt') as f:
+        db_name, db_user, db_pass = f.read().split('\n')
+
+except:
+    print('Error during reading database credentials')
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sim_site',
-        'USER': 'sim_user',
-        'PASSWORD': 'for_sim_user',
+        'NAME': db_name,
+        'USER': db_user,
+        'PASSWORD': db_pass,
         'HOST': '10.51.112.30',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }

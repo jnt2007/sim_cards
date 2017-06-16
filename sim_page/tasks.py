@@ -9,6 +9,32 @@ from sim_page.celeryapp import app
 from celery.task import periodic_task
 from celery.schedules import crontab
 
+try:
+    with open('mail_sender.txt') as f:
+        username, password = f.read().split('\n')
+
+except:
+    print('Error during reading sender credentials')
+
+
+def send_email(recipient, subject, body):
+    import smtplib
+
+    TO = recipient if type(recipient) is list else [recipient]
+
+    # Prepare actual message
+    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (username, ", ".join(TO), subject, body)
+    try:
+        server_ssl = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+        server_ssl.ehlo()  # optional, called by login()
+        server_ssl.login(username, password)
+        server_ssl.sendmail(username, str(recipient), message)
+        server_ssl.close()
+        print('Successfully sent the mail')
+    except:
+        print("Failed to send mail")
+
 
 def send_email(recipient, subject, body):
     import smtplib
@@ -58,7 +84,7 @@ def check_balance(sim_card_id):
         if output < 10 and output < sim_card.balance and sim_card.notification_address:
             print('Going to send mail to ', sim_card.notification_address, end=' ')
             send_email(sim_card.notification_address, 'Low balance on card {}'.format(sim_card.name),
-                       '''Hey bro, you have low balance on your SIM card {0} with number {1} which called {3}
+                       '''Hey bro, you have low balance on your SIM card {0} with number {1} which assigned to {3}
 
 Here is {2} UAH
 
