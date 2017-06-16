@@ -58,11 +58,11 @@ def check_balance(sim_card_id):
         if output < 10 and output < sim_card.balance and sim_card.notification_address:
             print('Going to send mail to ', sim_card.notification_address, end=' ')
             send_email(sim_card.notification_address, 'Low balance on card {}'.format(sim_card.name),
-                       '''Hey bro, you have low balance on your SIM card {0} with number {1}
+                       '''Hey bro, you have low balance on your SIM card {0} with number {1} which called {3}
 
 Here is {2} UAH
 
-Do not forget to popovnutu rakhunok. Have a nice day :)'''.format(sim_card.sim_number, sim_card.name, output))
+Do not forget to popovnyty rakhunok. Have a nice day :)'''.format(sim_card.sim_number, sim_card.name, output, sim_card.appointment))
 
         sim_card.balance = output
         sim_card.last_update = timezone.now()
