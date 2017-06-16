@@ -33,7 +33,7 @@ if socket.gethostname() == 'logger':
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.51.112.30', 'sims.visonic']
 
 
 # Application definition
@@ -94,8 +94,9 @@ WSGI_APPLICATION = 'sims.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 try:
-    with open('db.txt') as f:
+    with open(os.path.join(BASE_DIR, 'db.txt')) as f:
         db_name, db_user, db_pass = f.read().split('\n')
+#        db_name, db_user, db_pass = 'sim_site', 'sim_user', 'for_sim_user'
 
 except:
     print('Error during reading database credentials')

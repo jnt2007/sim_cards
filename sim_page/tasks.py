@@ -8,9 +8,10 @@ from sim_page.models import SimCard
 from sim_page.celeryapp import app
 from celery.task import periodic_task
 from celery.schedules import crontab
+import os
 
 try:
-    with open('mail_sender.txt') as f:
+    with open('/home/anton/www/sim_site/mail_sender.txt') as f:
         username, password = f.read().split('\n')
 
 except:
