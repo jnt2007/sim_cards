@@ -81,11 +81,11 @@ def schedule_balance_renewal(request):
     if sim_card.balance_renewal_in_progress:
         return 'updating balance for this sim in progress'
 
+    check_balance.delay(sim_card_id)
+
     sim_card.balance_renewal_in_progress = True
 
     sim_card.save()
-
-    check_balance.delay(sim_card_id)
 
     if int(request.GET['owner_id']) == 1:
         return redirect('/pmaster/')
