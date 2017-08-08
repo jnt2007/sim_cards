@@ -82,7 +82,7 @@ def check_balance(sim_card_id):
         return output
 
     if isinstance(output, float):
-        if output < 10 and output < sim_card.balance and sim_card.notification_address:
+        if output < 10 and output < float(sim_card.balance) and sim_card.notification_address:
             print('Going to send mail to ', sim_card.notification_address, end=' ')
             send_email(sim_card.notification_address, 'Low balance on card {}'.format(sim_card.name),
                        '''Hey bro, you have low balance on your SIM card {0} with number {1} which assigned to {3}
